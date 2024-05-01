@@ -34,12 +34,16 @@ export async function createEvent({ userId, event, path }: CreateEventParams) {
 
     const organizer = await User.findById(userId)
     if (!organizer) throw new Error('Organizer not found')
-
+ console.log({
+categoryId: event.categoryId,
+organizerId: userId,
+})
     const newEvent = await Event.create({ ...event, category: event.categoryId, organizer: userId })
     revalidatePath(path)
 
     return JSON.parse(JSON.stringify(newEvent))
   } catch (error) {
+    console.log(error);
     handleError(error)
   }
 }
