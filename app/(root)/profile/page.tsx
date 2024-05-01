@@ -14,10 +14,12 @@ const ProfilePage = async ({ searchParams }: SearchParamProps) => {
 
   const ordersPage = Number(searchParams?.ordersPage) || 1;
   const eventsPage = Number(searchParams?.eventsPage) || 1;
- 
+
+  const orders = await getOrdersByUser({ userId, page: ordersPage})
+
+  const orderedEvents = orders?.data.map((order: IOrder) => order.event) || [];
   const organizedEvents = await getEventsByUser({ userId, page: eventsPage })
 
-  
   return (
     <>
       {/* My Tickets */}
@@ -27,21 +29,21 @@ const ProfilePage = async ({ searchParams }: SearchParamProps) => {
           <Button asChild size="lg" className="button hidden sm:flex">
             <Link href="/#events">
               Explore More Events
-            </Link>
+            </Link> 
           </Button>
         </div>
       </section>
 
       <section className="wrapper my-8">
         <Collection 
-          data={[]}
+          data={orderedEvents}
           emptyTitle="No event tickets purchased yet"
           emptyStateSubtext="No worries - plenty of exciting events to explore!"
           collectionType="My_Tickets"
           limit={3}
           page={ordersPage}
           urlParamName="ordersPage"
-          totalPages={6}
+          totalPages={orders?.totalPages}
         />
       </section>
 
@@ -66,7 +68,7 @@ const ProfilePage = async ({ searchParams }: SearchParamProps) => {
           limit={3}
           page={eventsPage}
           urlParamName="eventsPage"
-          totalPages={6}
+          totalPages={organizedEvents?.totalPages}
         />
       </section>
     </>
