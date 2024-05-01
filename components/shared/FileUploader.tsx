@@ -1,6 +1,10 @@
 'use client'
 
 import { useCallback, Dispatch, SetStateAction } from 'react'
+<<<<<<< HEAD
+=======
+
+>>>>>>> 32c03c589512c635c1a67b8bf80a60df1d35d00f
 import { useDropzone } from '@uploadthing/react/hooks'
 import { generateClientDropzoneAccept } from 'uploadthing/client'
 import { Button } from '@/components/ui/button'
