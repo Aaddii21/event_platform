@@ -12,7 +12,10 @@ export interface IOrder extends Document {
     _id: string
     firstName: string
     lastName: string
+    unique: true
   }
+   
+
 }
 
 export type IOrderItem = {
@@ -22,6 +25,7 @@ export type IOrderItem = {
   eventTitle: string
   eventId: string
   buyer: string
+  email: string
 }
 
 const OrderSchema = new Schema({
@@ -44,6 +48,9 @@ const OrderSchema = new Schema({
   buyer: {
     type: Schema.Types.ObjectId,
     ref: 'User',
+  },
+  email: { type: Schema.Types.ObjectId ,
+    ref: 'email',
   },
 })
 
