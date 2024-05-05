@@ -19,3 +19,7 @@ export default clerkMiddleware({
 export const config = {
   matcher: ['/((?!.*\\..*|_next).*)', '/', '/(api|trpc)(.*)'],
 };
+
+function clerkMiddleware(arg0: { publicRoutes: string[]; ignoredRoutes: string[]; }) {
+  throw new Error("Function not implemented.");
+}
