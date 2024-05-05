@@ -1,7 +1,6 @@
-import { clerkMiddleware } from "@clerk/nextjs/server";
-
-
-export default clerkMiddleware({
+import { authMiddleware } from "@clerk/nextjs";
+ 
+export default authMiddleware({
   publicRoutes: [
     '/',
     '/events/:id',
@@ -15,11 +14,7 @@ export default clerkMiddleware({
     '/api/uploadthing'
   ]
 });
-
+ 
 export const config = {
-  matcher: ['/((?!.*\\..*|_next).*)', '/', '/(api|trpc)(.*)'],
+  matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
 };
-
-function clerkMiddleware(arg0: { publicRoutes: string[]; ignoredRoutes: string[]; }) {
-  throw new Error("Function not implemented.");
-}
